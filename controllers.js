@@ -1,6 +1,6 @@
 const fs = require("fs-extra");
 
-const getDataLocal = async (req, res) => {
+const getDataLocal = async () => {
   const fileBuffer = await fs.readFile("./public/task.json");
   const data = JSON.parse(fileBuffer);
   return data;
@@ -8,7 +8,10 @@ const getDataLocal = async (req, res) => {
 
 const getData = async (req, res) => {
   const data = await getDataLocal();
-  res.json(data);
+  if(data.length === 0) {
+    return res.status(404).json({ message: "Data not found" });
+  }
+  res.staus(200).json(data);
 };
 
 const addData = async (req, res) => {
