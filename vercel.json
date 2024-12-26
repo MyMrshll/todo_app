@@ -1,7 +1,9 @@
 {
     "version": 2,
     "name": "todo-app",
-    "public": "public",
+    "builds": [
+      { "src": "index.js", "use": "@vercel/node" }
+    ],
     "routes": [
       { "handle": "filesystem" },
       { "src": "/(.*)", "dest": "index.js" }
